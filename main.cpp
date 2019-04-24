@@ -251,6 +251,22 @@ public:
     virtual void Afisare()=0;
     Arbore ():nr_noduri(0) {}
     Arbore (int x):nr_noduri(x) {}
+    bool operator <(Arbore &A)
+      {
+       return nr_noduri<A.nr_noduri;
+      }
+    bool operator >(Arbore &A)
+      {
+       return nr_noduri>A.nr_noduri;
+      }
+    bool operator ==(Arbore &A)
+      {
+       return nr_noduri==A.nr_noduri;
+      }
+    bool operator !=(Arbore &A)
+       {
+      return nr_noduri!=A.nr_noduri;
+       }
     int NR()
     {
         return nr_noduri;
@@ -288,37 +304,6 @@ public:
     {
         radacina=0;
     }
-    /*ABC(const ABC &A)
-    {
-    //set_nr_noduri(A.NR());
-    Nod_ABC *c,*N=new Nod_ABC((*A.radacina).get_info());
-    //addfiu(p,Nod(A.radacina->info));
-    radacina=N;
-    Nod_ABC *C[NR()+1],*C2[NR()+1];
-    int st=0,dr=0;
-    C[dr]=A.radacina;
-    C2[dr]=radacina;
-    while(st<=dr)
-    {
-        N=C2[st];
-        c=C[st];
-        st++;
-        if((*c).get_frate!=0)
-        {
-            add_frate(*((*c).get_frate()).get_info());
-            dr++;
-            C2[dr]=(*N).get_frate();
-            C[dr]=(*c).get_frate();
-        }
-        if(c->fiu!=0)
-        {
-            add_fiu_stang(*((*c).get_fiu_stang()).get_info());
-            dr++;
-            C2[dr]=(*N).get_fiu_stang();
-            C[dr]=(*c).get_fiu_stang();
-        }
-    }
-    }*/
     void RSD(Nod_ABC* N)
     {
         fout<<(*N)<<" ";
@@ -617,15 +602,23 @@ int main()
 {
     int i,N,tip;
     fin>>N;
-    AB_oarecare *A = new AB_oarecare[N];
+    ABC *A = new ABC[N];
     for(i=0; i<N; i++)
     {
         fin>>(A[i]);
         fout<<(A[i]);
     }
-    AB_oarecare B;
-    B=A[0];
-    fout<<B;
-    delete[] A;
 
+    AB_oarecare B,C;
+    fin>>B;
+    fout<<B;
+    C=B;
+    fout<<C;
+    fout<<"\n"<<(C==B);
+   // AB_oarecare C;
+   // fin>>C;
+   // fout<<C;
+
+
+    delete[] A;
 }
